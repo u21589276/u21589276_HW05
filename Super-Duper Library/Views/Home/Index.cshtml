@@ -61,12 +61,27 @@
                       <tr>
                           <td>@book.BookId</td>
                           <td>@book.Name</td>
-                          <td>-</td>
-                          <td>-</td>
+
+                          @foreach (var author in Model.Authors)
+                          {
+                              if (book.AuthorId == author.AuthorId)
+                              {
+                                  <td>@author.Surname</td>
+                              }
+
+                          }
+                          @foreach (var booktype in Model.Types)
+                          {
+                              if (book.TypeId == booktype.TypeId)
+                              {
+                                  <td>@booktype.Name</td>
+                              }
+
+                          }
                           <td>@book.Pagecount</td>
                           <td>@book.Point</td>
                           <td>-</td>
-                          <td>@Html.ActionLink("View", "Books", "Home", new { BookId = book.BookId }, new { @class = "btn btn-primary" })</td>
+                          <td>@Html.ActionLink("View", "Books", "Home", new { id = book.BookId }, new { @class = "btn btn-primary" })</td>
                       </tr>
                   }
               </table>

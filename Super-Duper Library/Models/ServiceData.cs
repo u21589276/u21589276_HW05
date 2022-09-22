@@ -61,8 +61,8 @@ namespace Super_Duper_Library.Models
             try
             {
                 myConnection.Open();
-                SqlCommand getbookCommand = new SqlCommand("select B.*,A.name as Author,T.name as Type from books as B,authors as A,types as T where B.authorId = A.authorId and b.typeId = T.typeId", myConnection);
-                SqlDataReader myReader = getbookCommand.ExecuteReader();
+                SqlCommand getauthorsCommand = new SqlCommand("select * from authors", myConnection);
+                SqlDataReader myReader = getauthorsCommand.ExecuteReader();
                 while (myReader.Read())
                 {
                     Authors author = new Authors();
@@ -82,6 +82,35 @@ namespace Super_Duper_Library.Models
             }
             return authors;
         }
+
+        public List<Types> getAllBtypes()
+        {
+            List<Types> Type = new List<Types>();
+            try
+            {
+                myConnection.Open();
+                SqlCommand getTypeCommand = new SqlCommand("select * from types", myConnection);
+                SqlDataReader myReader = getTypeCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Types types = new Types();
+                    types.TypeId = Convert.ToInt32(myReader["authorId"]);
+                    types.Name = myReader["name"].ToString();
+                    
+                    Type.Add(types);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return Type;
+        }
+
 
     }
 }

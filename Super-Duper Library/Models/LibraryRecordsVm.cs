@@ -9,7 +9,8 @@ namespace Super_Duper_Library.Models
     {
         public List<Books> Books { get; set; }
         public List<Students> Students { get; set; }
-
+        public List<Authors> Authors { get; set; }
+        public List<Types> Types { get; set; }
         public LibraryRecordsVm()
         {
 

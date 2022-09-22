@@ -16,6 +16,8 @@ namespace Super_Duper_Library.Controllers
             bookRecords = new LibraryRecordsVm
             {
                 Books = serviceData.getAllBooks(),
+                Authors = serviceData.getAllAuthors(),
+                Types = serviceData.getAllBtypes()
                 
             };
             return View(bookRecords);
