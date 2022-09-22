@@ -94,7 +94,7 @@ namespace Super_Duper_Library.Models
                 while (myReader.Read())
                 {
                     Types types = new Types();
-                    types.TypeId = Convert.ToInt32(myReader["authorId"]);
+                    types.TypeId = Convert.ToInt32(myReader["typeId"]);
                     types.Name = myReader["name"].ToString();
                     
                     Type.Add(types);
