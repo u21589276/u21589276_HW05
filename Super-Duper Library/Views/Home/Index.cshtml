@@ -1,4 +1,44 @@
-﻿@model 
-@{
+﻿@{
     ViewBag.Title = "Books";
 }
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <form class="form-inline">
+        <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Search Book Name" />
+        </div>
+
+        <div class="col-sm-2">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Select a type
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Select a Author
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-success form-control">Search</button>
+        </div>
+
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-danger form-control">Clear</button>
+        </div>
+    </form>
+</div>
