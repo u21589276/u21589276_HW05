@@ -13,5 +13,12 @@ namespace Super_Duper_Library.Models
         public int Point { get; set; }
         public int AuthorId { get; set; }
         public int TypeId { get; set; }
+
+        public Books()
+        {
+
+        }
     }
+
+
 }

@@ -10,12 +10,16 @@ namespace Super_Duper_Library.Models
 {
     public class ServiceData
     {
-        private String ConnectionString;
+        private static ServiceData instance;
         SqlConnection myConnection = new SqlConnection("Data Source=cmsa\\tew_sqlexpress;Initial Catalog=Library;Integrated Security=True");
 
-        public ServiceData()
+        public static ServiceData getInstance()
         {
-
+            if (instance == null)
+            {
+                instance = new ServiceData();
+            }
+            return instance;
         }
 
         public List<Books> getAllBooks()
