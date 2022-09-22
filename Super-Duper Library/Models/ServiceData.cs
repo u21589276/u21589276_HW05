@@ -25,11 +25,10 @@ namespace Super_Duper_Library.Models
         public List<Books> getAllBooks()
         {
             List<Books> bookData = new List<Books>();
-            //TODO: Complete this
             try
             {
                 myConnection.Open();
-                SqlCommand getbookCommand = new SqlCommand("select * from books", myConnection);
+                SqlCommand getbookCommand = new SqlCommand("select B.*,A.name as Author,T.name as Type from books as B,authors as A,types as T where B.authorId = A.authorId and b.typeId = T.typeId", myConnection);
                 SqlDataReader myReader = getbookCommand.ExecuteReader();
                 while (myReader.Read())
                 {
@@ -40,7 +39,7 @@ namespace Super_Duper_Library.Models
                     books.Point = Convert.ToInt32(myReader["point"]);
                     books.AuthorId = Convert.ToInt32(myReader["authorId"]);
                     books.TypeId = Convert.ToInt32(myReader["typeId"]);
-
+                   
 
                     bookData.Add(books);
                 }
@@ -54,6 +53,34 @@ namespace Super_Duper_Library.Models
                 myConnection.Close();
             }
             return bookData;
+        }
+
+        public List<Authors> getAllAuthors()
+        {
+            List<Authors> authors = new List<Authors>();
+            try
+            {
+                myConnection.Open();
+                SqlCommand getbookCommand = new SqlCommand("select B.*,A.name as Author,T.name as Type from books as B,authors as A,types as T where B.authorId = A.authorId and b.typeId = T.typeId", myConnection);
+                SqlDataReader myReader = getbookCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Authors author = new Authors();
+                    author.AuthorId = Convert.ToInt32(myReader["authorId"]);
+                    author.Name = myReader["name"].ToString();
+                    author.Surname = myReader["surname"].ToString();
+                    authors.Add(author);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return authors;
         }
 
     }
