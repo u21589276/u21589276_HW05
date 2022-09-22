@@ -24,7 +24,7 @@
 
         <div class="col-sm-2">
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Select a Author
                     <span class="caret"></span>
                 </button>
@@ -43,29 +43,32 @@
         </div>
     </form>
 
-    <table class="table">
-        <tr class="thead">
-            <th>#</th>
-            <th>Name</th>
-            <th>Author</th>
-            <th>Type</th>
-            <th>Page Count</th>
-            <th>Points</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-        @foreach (var book in Model.Books)
-            {
-                <tr>
-                    <td>@book.BookId</td>
-                    <td>@book.Name</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>@book.Pagecount</td>
-                    <td>@book.Point</td>
-                    <td>-</td>
-                    <td>@Html.ActionLink("View", "Books", "Home", new { BookId = book.BookId }, new { @class = "btn btn-primary" })</td>
-                </tr>
-            }
-    </table>
+    <br /><br />
+          <div class="col-md-12">
+              <table class="table">
+                  <tr class="thead">
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Author</th>
+                      <th>Type</th>
+                      <th>Page Count</th>
+                      <th>Points</th>
+                      <th>Status</th>
+                      <th></th>
+                  </tr>
+                  @foreach (var book in Model.Books)
+                  {
+                      <tr>
+                          <td>@book.BookId</td>
+                          <td>@book.Name</td>
+                          <td>-</td>
+                          <td>-</td>
+                          <td>@book.Pagecount</td>
+                          <td>@book.Point</td>
+                          <td>-</td>
+                          <td>@Html.ActionLink("View", "Books", "Home", new { BookId = book.BookId }, new { @class = "btn btn-primary" })</td>
+                      </tr>
+                  }
+              </table>
+          </div>
 </div>
