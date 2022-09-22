@@ -12,8 +12,13 @@ namespace Super_Duper_Library.Controllers
         private ServiceData serviceData = new ServiceData();
         public ActionResult Index()
         {
-            List<Books> bookData = serviceData.getAllBooks();
-            return View(bookData);
+            LibraryRecordsVm bookRecords = null;
+            bookRecords = new LibraryRecordsVm
+            {
+                Books = serviceData.getAllBooks(),
+                
+            };
+            return View(bookRecords);
         }
 
         public ActionResult Students()

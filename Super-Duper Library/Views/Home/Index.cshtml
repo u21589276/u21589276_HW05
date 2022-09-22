@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Super_Duper_Library.Models.LibraryRecordsVm
+@{
     ViewBag.Title = "Books";
 }
 
@@ -41,4 +42,30 @@
             <button type="button" class="btn btn-danger form-control">Clear</button>
         </div>
     </form>
+
+    <table class="table">
+        <tr class="thead">
+            <th>#</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Type</th>
+            <th>Page Count</th>
+            <th>Points</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>@book.BookId</td>
+                    <td>@book.Name</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>@book.Pagecount</td>
+                    <td>@book.Point</td>
+                    <td>-</td>
+                    <td>@Html.ActionLink("View", "Books", "Home", new { BookId = book.BookId }, new { @class = "btn btn-primary" })</td>
+                </tr>
+            }
+    </table>
 </div>
