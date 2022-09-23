@@ -127,6 +127,7 @@
     <Compile Include="Models\Authors.cs" />
     <Compile Include="Models\Books.cs" />
     <Compile Include="Models\Borrows.cs" />
+    <Compile Include="Models\BorrowsVM.cs" />
     <Compile Include="Models\LibraryRecordsVm.cs" />
     <Compile Include="Models\ServiceData.cs" />
     <Compile Include="Models\Students.cs" />

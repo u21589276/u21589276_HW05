@@ -111,6 +111,70 @@ namespace Super_Duper_Library.Models
             return Type;
         }
 
+        public List<Borrows> getBorrows(int BookId)
+        {
+            List<Borrows> borrows = new List<Borrows>();
+            try
+            {
+                myConnection.Open();
+                SqlCommand getborrCommand = new SqlCommand("select * from borrows where bookId = '"+ BookId + "'", myConnection);
+                SqlDataReader myReader = getborrCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Borrows Borrow = new Borrows();
+                    Borrow.BorrowId = Convert.ToInt32(myReader["typeId"]);
+                    Borrow.BookId = Convert.ToInt32(myReader["bookId"]);
+                    Borrow.StudentId = Convert.ToInt32(myReader["studentId"]);
+                    Borrow.TakenDate = Convert.ToDateTime(myReader["takenDate"]);
+                    Borrow.BroughtDate = Convert.ToDateTime(myReader["broughtDate"]);
+
+                    borrows.Add(Borrow);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return borrows;
+        }
+
+        public List<Students> getStudents(int BookId)
+        {
+            List<Students> students = new List<Students>();
+            try
+            {
+                myConnection.Open();
+                SqlCommand getstuCommand = new SqlCommand("select * from students", myConnection);
+                SqlDataReader myReader = getstuCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Students student = new Students();
+                    student.StudentId = Convert.ToInt32(myReader["studentId"]);
+                    student.Name = myReader["name"].ToString();
+                    student.Surname = myReader["surname"].ToString();
+                    student.Birthdate = Convert.ToDateTime(myReader["birthdate"]);
+                    student.Gender = myReader["gender"].ToString();
+                    student.Class = myReader["class"].ToString();
+                    student.Point = Convert.ToInt32(myReader["point"]);
+
+                    students.Add(student);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return students;
+        }
+
 
     }
 }

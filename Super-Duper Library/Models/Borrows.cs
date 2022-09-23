@@ -12,5 +12,6 @@ namespace Super_Duper_Library.Models
         public int BookId { get; set; }
         public DateTime TakenDate { get; set; }
         public DateTime BroughtDate { get; set; }
+
     }
 }

@@ -1,5 +1,38 @@
-﻿@{
-    ViewBag.Title = "Books";
-}
+﻿@model Super_Duper_Library.Models.BorrowsVM
 
 
+<h1></h1>
+<br />
+
+
+<div class="row">
+    <div class="col-sm-6"><h2 class="text-left"># Borrows - @Model.Borrows.Count()</h2></div>
+    <div class="col-sm-6 text-right">@Html.ActionLink("View Students", "Students", "Home", new { borrowId = Model.Books }, new { @class = "btn btn-primary" })</div>
+
+    <div class="col-sm-12">
+        <table class="table">
+            <tr class="thead">
+                <th>#</th>
+                <th>Taken Date</th>
+                <th>Brought Date</th>
+                <th>Borrowed By</th>
+            </tr>
+            @foreach (var borrow in Model.Borrows)
+            {
+                <tr>
+                    <td>@borrow.BorrowId</td>
+                    <td>@borrow.TakenDate</td>
+                    <td>@borrow.BroughtDate</td>
+                    @foreach (var student in Model.Students)
+                    {
+                        if(borrow.StudentId == student.StudentId)
+                        {
+                            <td>@student.Name @student.Surname</td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>

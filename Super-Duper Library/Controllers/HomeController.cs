@@ -29,10 +29,18 @@ namespace Super_Duper_Library.Controllers
             return View();
         }
 
-        public ActionResult Books()
+        public ActionResult Books(int selectedBookId)
         {
-           
-            return View();
+            BorrowsVM borrows = null;
+            borrows = new BorrowsVM
+            {
+                Borrows = serviceData.getBorrows(selectedBookId),
+                Books = serviceData.getAllBooks(),
+                Students = serviceData.getStudents(selectedBookId)
+                
+            };
+            
+            return View(borrows);
         }
     }
 }
