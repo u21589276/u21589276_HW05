@@ -33,13 +33,13 @@ namespace Super_Duper_Library.Controllers
             return View(students);
         }
 
-        [HttpPost]
-        public ActionResult Books(int selectedBookId)
+        
+        public ActionResult Books(int id)
         {
             BorrowsVM borrows = null;
             borrows = new BorrowsVM
             {
-                Borrows = serviceData.getBorrows(selectedBookId),
+                Borrows = serviceData.getBorrows(id),
                 Books = serviceData.getAllBooks(),
                 Students = serviceData.getStudents()
                 

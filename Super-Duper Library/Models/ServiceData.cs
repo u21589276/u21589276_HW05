@@ -111,18 +111,18 @@ namespace Super_Duper_Library.Models
             return Type;
         }
 
-        public List<Borrows> getBorrows(int selectedBookId)
+        public List<Borrows> getBorrows(int id)
         {
             List<Borrows> borrows = new List<Borrows>();
             try
             {
                 myConnection.Open();
-                SqlCommand getborrCommand = new SqlCommand("select * from borrows where bookId = "+ selectedBookId , myConnection);
+                SqlCommand getborrCommand = new SqlCommand("select *, b.name from borrows, books as b where b.bookId =" + id + " and borrows.bookId =" + id, myConnection);
                 SqlDataReader myReader = getborrCommand.ExecuteReader();
                 while (myReader.Read())
                 {
                     Borrows Borrow = new Borrows();
-                    Borrow.BorrowId = Convert.ToInt32(myReader["typeId"]);
+                    Borrow.BorrowId = Convert.ToInt32(myReader["borrowId"]);
                     Borrow.BookId = Convert.ToInt32(myReader["bookId"]);
                     Borrow.StudentId = Convert.ToInt32(myReader["studentId"]);
                     Borrow.TakenDate = Convert.ToDateTime(myReader["takenDate"]);

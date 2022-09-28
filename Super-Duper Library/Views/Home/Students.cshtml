@@ -40,6 +40,18 @@
                 <th>Class</th>
                 <th></th>
 
+                @foreach (var student in Model.Students)
+            {
+                <tr>
+                    <td>@student.StudentId</td>
+                    <td>@student.Name</td>
+                    <td>@student.Surname</td>
+                    <td>@student.Class</td>
+                    <td>@student.Point</td>
+                    <td></td>
+                </tr>
+            }
+
             </tr>
         </table>
     </div>
