@@ -25,10 +25,15 @@ namespace Super_Duper_Library.Controllers
 
         public ActionResult Students()
         {
-            
-            return View();
+            allStudentsVm students = null;
+            students = new allStudentsVm
+            {
+                Students = serviceData.getStudents()
+            };
+            return View(students);
         }
 
+        [HttpPost]
         public ActionResult Books(int selectedBookId)
         {
             BorrowsVM borrows = null;
@@ -36,7 +41,7 @@ namespace Super_Duper_Library.Controllers
             {
                 Borrows = serviceData.getBorrows(selectedBookId),
                 Books = serviceData.getAllBooks(),
-                Students = serviceData.getStudents(selectedBookId)
+                Students = serviceData.getStudents()
                 
             };
             

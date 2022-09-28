@@ -1,5 +1,47 @@
-﻿@{
+﻿@model Super_Duper_Library.Models.allStudentsVm
+@{
     ViewBag.Title = "Students";
 }
 
 <h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <form class="form-inline">
+        <div class="col-sm-3">
+            <input type="text" class="form-control" placeholder="Search Book Name" />
+        </div>
+
+        <div class="col-sm-3">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Select a type
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownStuClass">
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-success form-control">Search</button>
+        </div>
+
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-danger form-control">Clear</button>
+        </div>
+    </form>
+
+    <div class="col-sm-12">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Class</th>
+                <th></th>
+
+            </tr>
+        </table>
+    </div>
+</div>
+

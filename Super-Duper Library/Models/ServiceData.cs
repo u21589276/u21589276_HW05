@@ -111,13 +111,13 @@ namespace Super_Duper_Library.Models
             return Type;
         }
 
-        public List<Borrows> getBorrows(int BookId)
+        public List<Borrows> getBorrows(int selectedBookId)
         {
             List<Borrows> borrows = new List<Borrows>();
             try
             {
                 myConnection.Open();
-                SqlCommand getborrCommand = new SqlCommand("select * from borrows where bookId = '"+ BookId + "'", myConnection);
+                SqlCommand getborrCommand = new SqlCommand("select * from borrows where bookId = "+ selectedBookId , myConnection);
                 SqlDataReader myReader = getborrCommand.ExecuteReader();
                 while (myReader.Read())
                 {
@@ -142,7 +142,7 @@ namespace Super_Duper_Library.Models
             return borrows;
         }
 
-        public List<Students> getStudents(int BookId)
+        public List<Students> getStudents()
         {
             List<Students> students = new List<Students>();
             try
