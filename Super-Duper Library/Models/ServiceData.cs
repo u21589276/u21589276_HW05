@@ -117,7 +117,7 @@ namespace Super_Duper_Library.Models
             try
             {
                 myConnection.Open();
-                SqlCommand getborrCommand = new SqlCommand("select *, b.name from borrows, books as b where b.bookId =" + id + " and borrows.bookId =" + id, myConnection);
+                SqlCommand getborrCommand = new SqlCommand("select *, b.name from borrows, books as b where b.bookId =" + id + " and borrows.bookId =" + id + " order by takenDate desc", myConnection);
                 SqlDataReader myReader = getborrCommand.ExecuteReader();
                 while (myReader.Read())
                 {
