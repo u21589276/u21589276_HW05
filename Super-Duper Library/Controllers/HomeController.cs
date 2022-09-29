@@ -17,8 +17,7 @@ namespace Super_Duper_Library.Controllers
             {
                 Books = serviceData.getAllBooks(),
                 Authors = serviceData.getAllAuthors(),
-                Types = serviceData.getAllBtypes()
-                
+                Types = serviceData.getAllBtypes(),
             };
             return View(bookRecords);
         }
@@ -47,5 +46,7 @@ namespace Super_Duper_Library.Controllers
             
             return View(borrows);
         }
+
+       
     }
 }

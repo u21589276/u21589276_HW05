@@ -4,30 +4,40 @@
 }
 
 <h2>@ViewBag.Title.</h2>
+<style>
+    .width-full {
+        width: 100%
+    }
+
+    .greenclr {
+        color: forestgreen;
+    }
+</style>
 
 <div class="row">
     <form class="form-inline">
         <div class="col-sm-3">
-            <input type="text" class="form-control" placeholder="Search Book Name" />
+            <input type="text" class="form-control width-full" name="studentname" placeholder="Search Student Name" />
         </div>
 
-        <div class="col-sm-3">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Select a type
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownStuClass">
-                </ul>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <select class="form-control" id="typeoption" name="type">
+                    <option value="" disabled selected hidden>Select a Class</option>
+                    @foreach (var type in Model.Students)
+                    {
+                        <option value="@type.Class">@type.Class</option>
+                    }
+                </select>
             </div>
         </div>
 
         <div class="col-sm-3">
-            <button type="button" class="btn btn-success form-control">Search</button>
+            <button type="button" class="btn btn-success width-full">Search</button>
         </div>
 
         <div class="col-sm-3">
-            <button type="button" class="btn btn-danger form-control">Clear</button>
+            <button type="button" class="btn btn-danger width-full">Clear</button>
         </div>
     </form>
     <br /><br />

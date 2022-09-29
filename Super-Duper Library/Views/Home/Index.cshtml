@@ -9,12 +9,18 @@
     .width-full{
         width: 100%
     }
+    .greenclr{
+        color: forestgreen;
+    }
+    .redclr{
+        color: red;
+    }
 </style>
 
 <div class="row">
-    <form class="form-inline" id="searchfrm" method="post">
+    <form>
         <div class="col-sm-4">
-            <input type="text" class="form-control width-full" name="bookname" placeholder="Search Book Name" />
+            <input type="text" class="form-control width-full" name="bookname" placeholder="Search Book Name"/>
         </div>
 
         <div class="col-sm-2">
@@ -42,57 +48,57 @@
         </div>
 
         <div class="col-sm-2">
-            <button type="submit" class="btn btn-success" style="width: 100%;">Search</button>
+            @Html.ActionLink("Search", "booksearch", "Home",new { bookname=Model.Bookname}, new { @class = "btn btn-success width-full" })
         </div>
     </form>
 
         <div class="col-sm-2">
             @Html.ActionLink("Reset", "Index", "Home", new { @class = "btn btn-danger width-full" })
         </div>
-   
 
-    <br /><br />
-          <div class="col-md-12">
-              <table class="table">
-                  <tr class="thead">
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Author</th>
-                      <th>Type</th>
-                      <th>Page Count</th>
-                      <th>Points</th>
-                      <th>Status</th>
-                      <th></th>
-                  </tr>
-                  @foreach (var book in Model.Books)
-                  {
-                      <tr>
-                          <td>@book.BookId</td>
-                          <td>@book.Name</td>
 
-                          @foreach (var author in Model.Authors)
-                          {
-                              if (book.AuthorId == author.AuthorId)
-                              {
-                                  <td>@author.Surname</td>
-                              }
+        <br /><br />
+        <div class="col-md-12">
+            <table class="table">
+                <tr class="thead">
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Page Count</th>
+                    <th>Points</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                @foreach (var book in Model.Books)
+                {
+                    <tr>
+                        <td>@book.BookId</td>
+                        <td>@book.Name</td>
 
-                          }
-                          @foreach (var booktype in Model.Types)
-                          {
-                              if (book.TypeId == booktype.TypeId)
-                              {
-                                  <td>@booktype.Name</td>
-                              }
+                        @foreach (var author in Model.Authors)
+                        {
+                            if (book.AuthorId == author.AuthorId)
+                            {
+                                <td>@author.Surname</td>
+                            }
 
-                          }
-                          <td>@book.Pagecount</td>
-                          <td>@book.Point</td>
-                          <td>Status</td>
-                          <td>@Html.ActionLink("View", "Books", "Home", new { id=book.BookId }, new { @class = "btn btn-primary" })</td>
-                          
-                      </tr>
-                  }
-              </table>
-          </div>
-</div>
+                        }
+                        @foreach (var booktype in Model.Types)
+                        {
+                            if (book.TypeId == booktype.TypeId)
+                            {
+                                <td>@booktype.Name</td>
+                            }
+
+                        }
+                        <td>@book.Pagecount</td>
+                        <td>@book.Point</td>
+                        <td>status</td>
+                        <td>@Html.ActionLink("View", "Books", "Home", new { id = book.BookId }, new { @class = "btn btn-primary" })</td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
