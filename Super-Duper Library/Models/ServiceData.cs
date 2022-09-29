@@ -127,6 +127,7 @@ namespace Super_Duper_Library.Models
                     Borrow.StudentId = Convert.ToInt32(myReader["studentId"]);
                     Borrow.TakenDate = Convert.ToDateTime(myReader["takenDate"]);
                     Borrow.BroughtDate = Convert.ToDateTime(myReader["broughtDate"]);
+                    Borrow.bookname = myReader["name"].ToString();
 
                     borrows.Add(Borrow);
                 }
