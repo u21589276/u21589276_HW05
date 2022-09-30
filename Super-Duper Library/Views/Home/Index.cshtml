@@ -18,7 +18,7 @@
 </style>
 
 <div class="row">
-    <form>
+    <form asp-controller="SearchEngineController" asp-action="Index">
         <div class="col-sm-4">
             <input type="text" class="form-control width-full" name="bookname" placeholder="Search Book Name"/>
         </div>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="col-sm-2">
-            @Html.ActionLink("Search", "booksearch", "Home",new { bookname=Model.Bookname}, new { @class = "btn btn-success width-full" })
+            <input type="submit" value="Search" class="btn btn-success"/>
         </div>
     </form>
 

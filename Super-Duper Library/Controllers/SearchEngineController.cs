@@ -11,13 +11,14 @@ namespace Super_Duper_Library.Controllers
     {
         private ServiceData serviceData = new ServiceData();
         // GET: SearchEngine
-        public ActionResult Index()
+        public ActionResult Index(string bookname, string author, string type)
         {
+            
             LibraryRecordsVm searchdata = null;
             searchdata = new LibraryRecordsVm
             {
 
-                Books = serviceData.getAllBooks(),
+                Books = serviceData.getBooksbyName(bookname),
                 Authors = serviceData.getAllAuthors(),
                 Types = serviceData.getAllBtypes()
 
