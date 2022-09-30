@@ -179,6 +179,10 @@ namespace Super_Duper_Library.Models
 
         public List<Books> getBooksbyName(string bookname)
         {
+            /*List<Product> products = ListRepository.Products.Where(x =>
+                   (x.Prices.Average(y => y.Price) >= min) && (x.Prices.Average(y => y.Price) <= max)
+               ).ToList();*/
+
             //Books books = null;
             List<Books> wantedbook = getAllBooks();
 
