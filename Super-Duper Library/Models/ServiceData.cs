@@ -118,7 +118,7 @@ namespace Super_Duper_Library.Models
             try
             {
                 myConnection.Open();
-                SqlCommand getborrCommand = new SqlCommand("select *, b.name from borrows, books as b where b.bookId =" + id + " and borrows.bookId =" + id + "order by broughtDate desc", myConnection);
+                SqlCommand getborrCommand = new SqlCommand("select *, b.name from borrows, books as b where b.bookId =" + id + " and borrows.bookId =" + id + "order by borrowId desc", myConnection);
                 SqlDataReader myReader = getborrCommand.ExecuteReader();
                 while (myReader.Read())
                 {
@@ -269,13 +269,20 @@ namespace Super_Duper_Library.Models
             return wantedtype;
         }
 
-        public bool BorrowBook(int id)
+        public void BorrowBook(int stuId, int borrowedbookID)
         {
+            List<Borrows> borrow = getAllBorrows().OrderByDescending(b => b.BorrowId).ToList(); ;
+
+            //new borrow ID
+            int newBorroId = borrow[0].BorrowId + 1;
+            //teaken date
+            string currentdate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+
             try
             {
                 myConnection.Open();
-                SqlCommand UpdateStatement = new SqlCommand("UPDATE borrows SET broughtDate = '2015-10-20 14:04:00.000' WHERE borrowId = 95;", myConnection);
-                UpdateStatement.ExecuteNonQuery();
+                SqlCommand insertStatement = new SqlCommand("insert into borrows values("+newBorroId+", "+stuId+", "+ borrowedbookID + ", '"+currentdate+"', NULL)", myConnection);
+                insertStatement.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -286,7 +293,6 @@ namespace Super_Duper_Library.Models
             {
                 myConnection.Close();
             }
-            return true;
         }
 
        

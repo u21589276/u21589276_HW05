@@ -48,7 +48,15 @@
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Class</th>
-                <th></th>
+                @if (Model.StuBorrows[0].BroughtDate == "Book Out")
+                { 
+                     <th>Return Book</th>
+                }
+                else if (Model.StuBorrows[0].BroughtDate != null)
+                { 
+                    <th>Borrow Book</th>
+                }
+                </tr>
 
                 @foreach (var student in Model.Students)
             {
@@ -58,11 +66,25 @@
                     <td>@student.Surname</td>
                     <td>@student.Class</td>
                     <td>@student.Point</td>
-                    <td></td>
+                        @if (Model.StuBorrows[0].BroughtDate == "Book Out")
+                        {
+                            if (student.StudentId == Model.StuBorrows[0].StudentId)
+                            {
+                                <td>@Html.ActionLink("Return Book", "returnBook", "Home", new { stuId = student.StudentId}, new { @class = "btn btn-primary width-full" })</td>
+                            }
+                            else if (student.StudentId != Model.StuBorrows[0].StudentId)
+                            { 
+                                <td> </td>
+                            }
+                        }
+                        else if(Model.StuBorrows[0].BroughtDate != null)
+                        {
+                            <td>@Html.ActionLink("Borrow Book", "borrowBook", "Home", new { stuId = student.StudentId, borrowedbookID = Model.BookId }, new { @class = "btn btn-primary width-full" })</td>
+                        } 
                 </tr>
             }
 
-            </tr>
+            
         </table>
     </div>
 </div>

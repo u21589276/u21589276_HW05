@@ -26,17 +26,30 @@ namespace Super_Duper_Library.Controllers
             return View(bookRecords);
         }
 
-        public ActionResult Students()
+        public ActionResult Students(int id, int FirstborrowID)
         {
             allStudentsVm students = null;
             students = new allStudentsVm
             {
-                Students = serviceData.getStudents()
+                Students = serviceData.getStudents(),
+                StuBorrows = serviceData.getBorrows(id),
+                BookId = id,
+                FirtsBorrow = FirstborrowID
             };
             return View(students);
         }
 
-        
+        public ActionResult borrowBook(int stuId, int borrowedbookID)
+        {
+            allStudentsVm students = null;
+            students = new allStudentsVm
+            {
+                Students = serviceData.getStudents(),
+                
+            };
+            return RedirectToAction("Students");
+        }
+
         public ActionResult Books(int id, string Bname)
         {
            
@@ -47,11 +60,12 @@ namespace Super_Duper_Library.Controllers
                 Books = serviceData.getAllBooks(),
                 Students = serviceData.getStudents(),
                 BookName = Bname,
-             
+                BookID = id
             };
             
             return View(borrows);
         }
+
 
         [HttpPost]
         public ActionResult search(string bookname, string author, string type)
