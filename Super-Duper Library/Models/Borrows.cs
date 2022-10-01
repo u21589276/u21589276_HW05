@@ -11,8 +11,8 @@ namespace Super_Duper_Library.Models
         public int StudentId { get; set; }
         public int BookId { get; set; }
         public string bookname { get; set; }
-        public DateTime TakenDate { get; set; }
-        public DateTime BroughtDate { get; set; }
+        public string TakenDate { get; set; }
+        public string BroughtDate { get; set; }
 
     }
 }

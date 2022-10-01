@@ -118,16 +118,27 @@ namespace Super_Duper_Library.Models
             try
             {
                 myConnection.Open();
-                SqlCommand getborrCommand = new SqlCommand("select *, b.name from borrows, books as b where b.bookId =" + id + " and borrows.bookId =" + id + " order by takenDate desc", myConnection);
+                SqlCommand getborrCommand = new SqlCommand("select *, b.name from borrows, books as b where b.bookId =" + id + " and borrows.bookId =" + id + "order by broughtDate desc", myConnection);
                 SqlDataReader myReader = getborrCommand.ExecuteReader();
                 while (myReader.Read())
                 {
+                    var datenull = myReader["broughtDate"].ToString();
+
                     Borrows Borrow = new Borrows();
                     Borrow.BorrowId = Convert.ToInt32(myReader["borrowId"]);
                     Borrow.BookId = Convert.ToInt32(myReader["bookId"]);
                     Borrow.StudentId = Convert.ToInt32(myReader["studentId"]);
-                    Borrow.TakenDate = Convert.ToDateTime(myReader["takenDate"]);
-                    Borrow.BroughtDate = Convert.ToDateTime(myReader["broughtDate"]);
+                    Borrow.TakenDate = myReader["takenDate"].ToString();
+
+                    if (datenull == null || datenull == "")
+                    {
+                        Borrow.BroughtDate = "Book Out";
+                    }
+                    else if (datenull != null)
+                    {
+                        Borrow.BroughtDate = myReader["broughtDate"].ToString();
+                    }
+                    
                     Borrow.bookname = myReader["name"].ToString();
 
                     borrows.Add(Borrow);
@@ -158,8 +169,8 @@ namespace Super_Duper_Library.Models
                     Borrow.BorrowId = Convert.ToInt32(myReader["borrowId"]);
                     Borrow.BookId = Convert.ToInt32(myReader["bookId"]);
                     Borrow.StudentId = Convert.ToInt32(myReader["studentId"]);
-                    Borrow.TakenDate = Convert.ToDateTime(myReader["takenDate"]);
-                    Borrow.BroughtDate = Convert.ToDateTime(myReader["broughtDate"]);
+                    Borrow.TakenDate = myReader["takenDate"].ToString();
+                    Borrow.BroughtDate = myReader["broughtDate"].ToString();
 
                     borrows.Add(Borrow);
                 }
@@ -256,6 +267,26 @@ namespace Super_Duper_Library.Models
             }
 
             return wantedtype;
+        }
+
+        public bool BorrowBook(int id)
+        {
+            try
+            {
+                myConnection.Open();
+                SqlCommand UpdateStatement = new SqlCommand("UPDATE borrows SET broughtDate = '2015-10-20 14:04:00.000' WHERE borrowId = 95;", myConnection);
+                UpdateStatement.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+               
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return true;
         }
 
        
