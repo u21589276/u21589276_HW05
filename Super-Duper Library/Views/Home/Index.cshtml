@@ -73,32 +73,46 @@
                 </tr>
                 @foreach (var book in Model.Books)
                 {
-                    <tr>
-                        <td>@book.BookId</td>
-                        <td>@book.Name</td>
+            <tr>
+                <td>@book.BookId</td>
+                <td>@book.Name</td>
 
-                        @foreach (var author in Model.Authors)
+                @foreach (var author in Model.Authors)
+                {
+                    if (book.AuthorId == author.AuthorId)
+                    {
+                        <td>@author.Surname</td>
+                    }
+
+                }
+                @foreach (var booktype in Model.Types)
+                {
+                    if (book.TypeId == booktype.TypeId)
+                    {
+                        <td>@booktype.Name</td>
+                    }
+
+                }
+                <td>@book.Pagecount</td>
+                <td>@book.Point</td>
+                 @*@foreach (var borrow in Model.status)
+                {
+                   if (book.BookId == borrow.BookId)
+                    {
+                        if (borrow.BroughtDate == null)
                         {
-                            if (book.AuthorId == author.AuthorId)
-                            {
-                                <td>@author.Surname</td>
-                            }
-
+                            <td style="color: red;">Out</td>
                         }
-                        @foreach (var booktype in Model.Types)
+                        else if (borrow.BroughtDate != null)
                         {
-                            if (book.TypeId == booktype.TypeId)
-                            {
-                                <td>@booktype.Name</td>
-                            }
-
+                            <td style="color: forestgreen;">Available</td>
                         }
-                        <td>@book.Pagecount</td>
-                        <td>@book.Point</td>
-                        <td>status</td>
-                        <td>@Html.ActionLink("View", "Books", "Home", new { id = book.BookId, Bname = book.Name}, new { @class = "btn btn-primary" })</td>
+                    } 
+                }*@
+                <td>status</td>
+                <td>@Html.ActionLink("View", "Books", "Home", new { id = book.BookId, Bname = book.Name }, new { @class = "btn btn-primary" })</td>
 
-                    </tr>
+            </tr>
                 }
             </table>
         </div>

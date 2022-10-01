@@ -12,12 +12,16 @@ namespace Super_Duper_Library.Controllers
         private ServiceData serviceData = new ServiceData();
         public ActionResult Index()
         {
+            //List<Borrows> outborrows = serviceData.getAllBorrows().Where(b => b.BroughtDate == null).ToList();
+            //List<Borrows> Availborrows = serviceData.getAllBorrows().Where(b => b.BroughtDate != null).ToList();
+
             LibraryRecordsVm bookRecords = null;
             bookRecords = new LibraryRecordsVm
             {
                 Books = serviceData.getAllBooks(),
                 Authors = serviceData.getAllAuthors(),
                 Types = serviceData.getAllBtypes(),
+                Borrows = serviceData.getAllBorrows()
             };
             return View(bookRecords);
         }
@@ -35,14 +39,15 @@ namespace Super_Duper_Library.Controllers
         
         public ActionResult Books(int id, string Bname)
         {
-
+           
             BorrowsVM borrows = null;
             borrows = new BorrowsVM
             {
                 Borrows = serviceData.getBorrows(id),
                 Books = serviceData.getAllBooks(),
                 Students = serviceData.getStudents(),
-                BookName = Bname
+                BookName = Bname,
+             
             };
             
             return View(borrows);

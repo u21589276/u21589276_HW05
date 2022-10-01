@@ -1,7 +1,20 @@
 ﻿@model Super_Duper_Library.Models.BorrowsVM
 
 
-<h1>@Model.BookName </h1>
+<h1>
+    @Model.BookName
+
+        @if (Model.Borrows[0] == null)
+        {
+            <h1 style="color: red">- Book Out</h1>
+        }
+        else
+        {
+            <h1 style="color: green">- Book Available</h1>
+        }
+    
+  
+</h1>
 
 <div class="row">
     <div class="col-sm-6"><h2 class="text-left"># Borrows - @Model.Borrows.Count()</h2></div>

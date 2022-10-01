@@ -111,6 +111,7 @@ namespace Super_Duper_Library.Models
             return Type;
         }
 
+        //getborowsby id
         public List<Borrows> getBorrows(int id)
         {
             List<Borrows> borrows = new List<Borrows>();
@@ -128,6 +129,37 @@ namespace Super_Duper_Library.Models
                     Borrow.TakenDate = Convert.ToDateTime(myReader["takenDate"]);
                     Borrow.BroughtDate = Convert.ToDateTime(myReader["broughtDate"]);
                     Borrow.bookname = myReader["name"].ToString();
+
+                    borrows.Add(Borrow);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return borrows;
+        }
+
+        public List<Borrows> getAllBorrows()
+        {
+            List<Borrows> borrows = new List<Borrows>();
+            try
+            {
+                myConnection.Open();
+                SqlCommand getborrCommand = new SqlCommand("select * borrows", myConnection);
+                SqlDataReader myReader = getborrCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Borrows Borrow = new Borrows();
+                    Borrow.BorrowId = Convert.ToInt32(myReader["borrowId"]);
+                    Borrow.BookId = Convert.ToInt32(myReader["bookId"]);
+                    Borrow.StudentId = Convert.ToInt32(myReader["studentId"]);
+                    Borrow.TakenDate = Convert.ToDateTime(myReader["takenDate"]);
+                    Borrow.BroughtDate = Convert.ToDateTime(myReader["broughtDate"]);
 
                     borrows.Add(Borrow);
                 }
@@ -226,6 +258,7 @@ namespace Super_Duper_Library.Models
             return wantedtype;
         }
 
+       
 
 
     }
