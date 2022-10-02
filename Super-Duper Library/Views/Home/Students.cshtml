@@ -70,7 +70,7 @@
                         {
                             if (student.StudentId == Model.StuBorrows[0].StudentId)
                             {
-                                <td>@Html.ActionLink("Return Book", "returnBook", "Home", new { stuId = student.StudentId}, new { @class = "btn btn-primary width-full" })</td>
+                                <td>@Html.ActionLink("Return Book", "returnBook", new {id=Model.StuBorrows[0].BookId, borrowId=Model.StuBorrows[0].BorrowId, Bname=Model.Bookname}, new { @class = "btn btn-primary width-full" })</td>
                             }
                             else if (student.StudentId != Model.StuBorrows[0].StudentId)
                             { 
@@ -79,7 +79,7 @@
                         }
                         else if(Model.StuBorrows[0].BroughtDate != null)
                         {
-                            <td>@Html.ActionLink("Borrow Book", "borrowBook", "Home", new { stuId = student.StudentId, borrowedbookID = Model.BookId }, new { @class = "btn btn-primary width-full" })</td>
+                            <td>@Html.ActionLink("Borrow Book", "borrowBook", "Home", new {stuId = student.StudentId, borrowedbookID=Model.BookId }, new { @class = "btn btn-primary width-full" })</td>
                         } 
                 </tr>
             }

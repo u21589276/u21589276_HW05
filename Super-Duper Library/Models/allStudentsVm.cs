@@ -9,6 +9,7 @@ namespace Super_Duper_Library.Models
     {
         public List<Students> Students { get; set; }
         public int BookId { get; set; }
+        public string Bookname { get; set; }
         public List<Borrows> StuBorrows { get; set; }
         public int FirtsBorrow { get; set; }
         public List<Students> Class { get; set; }

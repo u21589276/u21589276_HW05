@@ -114,6 +114,7 @@ namespace Super_Duper_Library.Models
         //getborowsby id
         public List<Borrows> getBorrows(int id)
         {
+
             List<Borrows> borrows = new List<Borrows>();
             try
             {
@@ -161,16 +162,26 @@ namespace Super_Duper_Library.Models
             try
             {
                 myConnection.Open();
-                SqlCommand getborrCommand = new SqlCommand("select * borrows", myConnection);
+                SqlCommand getborrCommand = new SqlCommand("select * from borrows order by borrowId desc", myConnection);
                 SqlDataReader myReader = getborrCommand.ExecuteReader();
                 while (myReader.Read())
                 {
+                    var datenull = myReader["broughtDate"].ToString();
+
                     Borrows Borrow = new Borrows();
                     Borrow.BorrowId = Convert.ToInt32(myReader["borrowId"]);
                     Borrow.BookId = Convert.ToInt32(myReader["bookId"]);
                     Borrow.StudentId = Convert.ToInt32(myReader["studentId"]);
                     Borrow.TakenDate = myReader["takenDate"].ToString();
-                    Borrow.BroughtDate = myReader["broughtDate"].ToString();
+
+                    if (datenull == null || datenull == "")
+                    {
+                        Borrow.BroughtDate = "Book Out";
+                    }
+                    else if (datenull != null)
+                    {
+                        Borrow.BroughtDate = myReader["broughtDate"].ToString();
+                    }
 
                     borrows.Add(Borrow);
                 }
@@ -271,23 +282,45 @@ namespace Super_Duper_Library.Models
 
         public void BorrowBook(int stuId, int borrowedbookID)
         {
-            List<Borrows> borrow = getAllBorrows().OrderByDescending(b => b.BorrowId).ToList(); ;
-
+            List<Borrows> borro = getAllBorrows().FindAll(x => (x.BookId == borrowedbookID)).Take(1).ToList();
             //new borrow ID
-            int newBorroId = borrow[0].BorrowId + 1;
+            int borrtoIDAdd = borro[0].BorrowId;
+            int newBorroId = borrtoIDAdd+1;
             //teaken date
             string currentdate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
 
             try
             {
                 myConnection.Open();
-                SqlCommand insertStatement = new SqlCommand("insert into borrows values("+newBorroId+", "+stuId+", "+ borrowedbookID + ", '"+currentdate+"', NULL)", myConnection);
+                SqlCommand insertStatement = new SqlCommand("insert into borrows values("+ newBorroId +", "+ stuId +", "+ borrowedbookID + ", '"+currentdate+"', NULL)", myConnection);
                 insertStatement.ExecuteNonQuery();
             }
             catch (Exception)
             {
 
                
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        public void returnBook(int borrowId)
+        {
+            //teaken date
+            string currentdate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+
+            try
+            {
+                myConnection.Open();
+                SqlCommand updateStatement = new SqlCommand("UPDATE borrows SET broughtDate = '"+currentdate+"' WHERE borrowId ="+borrowId, myConnection);
+                updateStatement.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+
             }
             finally
             {

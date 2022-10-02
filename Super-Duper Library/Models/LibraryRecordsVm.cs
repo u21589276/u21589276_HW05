@@ -11,7 +11,6 @@ namespace Super_Duper_Library.Models
         public List<Authors> Authors { get; set; }
         public List<Types> Types { get; set; }
         public List<Borrows> Borrows { get; set; }
-        public string status { get; set; }
         public LibraryRecordsVm()
         {
 

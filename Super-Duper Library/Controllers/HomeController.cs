@@ -26,7 +26,7 @@ namespace Super_Duper_Library.Controllers
             return View(bookRecords);
         }
 
-        public ActionResult Students(int id, int FirstborrowID)
+        public ActionResult Students(int id, int FirstborrowID, string Bname)
         {
             allStudentsVm students = null;
             students = new allStudentsVm
@@ -34,20 +34,10 @@ namespace Super_Duper_Library.Controllers
                 Students = serviceData.getStudents(),
                 StuBorrows = serviceData.getBorrows(id),
                 BookId = id,
-                FirtsBorrow = FirstborrowID
+                FirtsBorrow = FirstborrowID,
+                Bookname = Bname
             };
             return View(students);
-        }
-
-        public ActionResult borrowBook(int stuId, int borrowedbookID)
-        {
-            allStudentsVm students = null;
-            students = new allStudentsVm
-            {
-                Students = serviceData.getStudents(),
-                
-            };
-            return RedirectToAction("Students");
         }
 
         public ActionResult Books(int id, string Bname)
@@ -66,56 +56,88 @@ namespace Super_Duper_Library.Controllers
             return View(borrows);
         }
 
-
-        [HttpPost]
-        public ActionResult search(string bookname, string author, string type)
+        public ActionResult borrowBook(int stuId, int borrowedbookID)
         {
-
-            LibraryRecordsVm searchdata = null;
-            if (bookname != null)
+            serviceData.BorrowBook(stuId, borrowedbookID);
+             /*BorrowsVM borrows = null;
+            borrows = new BorrowsVM
             {
-                searchdata = new LibraryRecordsVm
-                {
-
-                    Books = serviceData.getBooksbyName(bookname),
-                    Authors = serviceData.getAllAuthors(),
-                    Types = serviceData.getAllBtypes()
-
-                };
-
-            }
-            else if (author != null)
-            {
-                Authors allauthors = new Authors();
-                List<Books> specificbook = serviceData.getAllBooks().Where(b => b.AuthorId == allauthors.AuthorId).ToList();
-
-                searchdata = new LibraryRecordsVm
-                {
-
-                    Books = specificbook,
-                    Authors = serviceData.getbyAuthor(author),
-                    Types = serviceData.getAllBtypes()
-
-                };
-            }
-            else if (type != null)
-            {
-                Authors allauthors = new Authors();
-                List<Books> specificbook = serviceData.getAllBooks().Where(b => b.AuthorId == allauthors.AuthorId).ToList();
-
-                searchdata = new LibraryRecordsVm
-                {
-
-                    Books = specificbook,
-                    Authors = serviceData.getAllAuthors(),
-                    Types = serviceData.getbyType(type)
-
-                };
-            }
-
-            Console.WriteLine(bookname + " " + type + " " + author);
-            return RedirectToAction("Index",searchdata);
+                Borrows = serviceData.getBorrows(id),
+                Books = serviceData.getAllBooks(),
+                Students = serviceData.getStudents(),
+                BookName = Bname,
+                BookID = id
+            };*/
+            return RedirectToAction("Index");
         }
+
+        public ActionResult returnBook(int borrowId, int id, string Bname)
+        {
+            serviceData.returnBook(borrowId);
+           
+            BorrowsVM borrows = null;
+            borrows = new BorrowsVM
+            {
+                Borrows = serviceData.getBorrows(id),
+                Books = serviceData.getAllBooks(),
+                Students = serviceData.getStudents(),
+                BookName = Bname,
+                BookID = id
+            };
+            return RedirectToAction("Books", borrows);
+        }
+
+
+
+        //[HttpPost]
+        //public ActionResult search(string bookname, string author, string type)
+        //{
+
+        //    LibraryRecordsVm searchdata = null;
+        //    if (bookname != null)
+        //    {
+        //        searchdata = new LibraryRecordsVm
+        //        {
+
+        //            Books = serviceData.getBooksbyName(bookname),
+        //            Authors = serviceData.getAllAuthors(),
+        //            Types = serviceData.getAllBtypes()
+
+        //        };
+
+        //    }
+        //    else if (author != null)
+        //    {
+        //        Authors allauthors = new Authors();
+        //        List<Books> specificbook = serviceData.getAllBooks().Where(b => b.AuthorId == allauthors.AuthorId).ToList();
+
+        //        searchdata = new LibraryRecordsVm
+        //        {
+
+        //            Books = specificbook,
+        //            Authors = serviceData.getbyAuthor(author),
+        //            Types = serviceData.getAllBtypes()
+
+        //        };
+        //    }
+        //    else if (type != null)
+        //    {
+        //        Authors allauthors = new Authors();
+        //        List<Books> specificbook = serviceData.getAllBooks().Where(b => b.AuthorId == allauthors.AuthorId).ToList();
+
+        //        searchdata = new LibraryRecordsVm
+        //        {
+
+        //            Books = specificbook,
+        //            Authors = serviceData.getAllAuthors(),
+        //            Types = serviceData.getbyType(type)
+
+        //        };
+        //    }
+
+        //    Console.WriteLine(bookname + " " + type + " " + author);
+        //    return RedirectToAction("Index",searchdata);
+        //}
 
 
     }

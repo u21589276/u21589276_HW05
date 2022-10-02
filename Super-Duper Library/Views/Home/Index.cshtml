@@ -6,16 +6,20 @@
 <h2>@ViewBag.Title.</h2>
 
 <style>
-    .width-full{
+    .width-full {
         width: 100%
     }
-    .greenclr{
+
+    .greenclr {
         color: forestgreen;
     }
-    .redclr{
+
+    .redclr {
         color: red;
     }
 </style>
+
+
 
 <div class="row">
     @using (Html.BeginForm("search", "Home", FormMethod.Post))
@@ -53,67 +57,77 @@
         </div>
     }
 
-        <div class="col-sm-2">
-            @Html.ActionLink("Reset", "Index", "Home", new { @class = "btn btn-danger width-full" })
-        </div>
-
-
-        <br /><br />
-        <div class="col-md-12">
-            <table class="table">
-                <tr class="thead">
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>Type</th>
-                    <th>Page Count</th>
-                    <th>Points</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                @foreach (var book in Model.Books)
-                {
-            <tr>
-                <td>@book.BookId</td>
-                <td>@book.Name</td>
-
-                @foreach (var author in Model.Authors)
-                {
-                    if (book.AuthorId == author.AuthorId)
-                    {
-                        <td>@author.Surname</td>
-                    }
-
-                }
-                @foreach (var booktype in Model.Types)
-                {
-                    if (book.TypeId == booktype.TypeId)
-                    {
-                        <td>@booktype.Name</td>
-                    }
-
-                }
-                <td>@book.Pagecount</td>
-                <td>@book.Point</td>
-                 @*@foreach (var borrow in Model.status)
-                {
-                   if (book.BookId == borrow.BookId)
-                    {
-                        if (borrow.BroughtDate == null)
-                        {
-                            <td style="color: red;">Out</td>
-                        }
-                        else if (borrow.BroughtDate != null)
-                        {
-                            <td style="color: forestgreen;">Available</td>
-                        }
-                    } 
-                }*@
-                <td>status</td>
-                <td>@Html.ActionLink("View", "Books", "Home", new { id = book.BookId, Bname = book.Name }, new { @class = "btn btn-primary" })</td>
-
-            </tr>
-                }
-            </table>
-        </div>
+    <div class="col-sm-2">
+        @Html.ActionLink("Reset", "Index", "Home", new { @class = "btn btn-danger width-full" })
     </div>
+
+
+    
+
+    <br /><br />
+    <div class="col-md-12">
+        <table class="table">
+            <tr class="thead">
+                <th>#</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Type</th>
+                <th>Page Count</th>
+                <th>Points</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            @foreach (var book in Model.Books)
+            {
+
+        <tr>
+            <td>@book.BookId</td>
+            <td>@book.Name</td>
+
+            @foreach (var author in Model.Authors)
+            {
+                if (book.AuthorId == author.AuthorId)
+                {
+                    <td>@author.Surname</td>
+                }
+
+            }
+            @foreach (var booktype in Model.Types)
+            {
+                if (book.TypeId == booktype.TypeId)
+                {
+                    <td>@booktype.Name</td>
+                }
+
+            }
+            <td>@book.Pagecount</td>
+            <td>@book.Point</td>
+            @foreach (var borrow in Model.Borrows.FindAll(x => (x.BookId == book.BookId)).Take(1))
+            {
+
+                if (borrow.BroughtDate == "Book Out")
+                {
+                    <td style="color: red;">Out</td>
+
+                }
+                else if (borrow.BroughtDate != "Book Out")
+                {
+                    <td style="color: forestgreen;">Available</td>
+                }
+                else
+                {
+                    <td style="color: forestgreen;">Available</td>
+                }
+            }
+
+            <td>@Html.ActionLink("View", "Books", "Home", new { id = book.BookId, Bname = book.Name }, new { @class = "btn btn-primary" })</td>
+
+        </tr>
+
+            }
+
+
+
+        </table>
+    </div>
+</div>
