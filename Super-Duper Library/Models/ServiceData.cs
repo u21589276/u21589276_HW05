@@ -282,7 +282,7 @@ namespace Super_Duper_Library.Models
 
         public void BorrowBook(int stuId, int borrowedbookID)
         {
-            List<Borrows> borro = getAllBorrows().FindAll(x => (x.BookId == borrowedbookID)).Take(1).ToList();
+            List<Borrows> borro = getAllBorrows().Take(1).ToList();
             //new borrow ID
             int borrtoIDAdd = borro[0].BorrowId;
             int newBorroId = borrtoIDAdd+1;
