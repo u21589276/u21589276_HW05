@@ -292,7 +292,7 @@ namespace Super_Duper_Library.Models
             try
             {
                 myConnection.Open();
-                SqlCommand insertStatement = new SqlCommand("insert into borrows values("+ newBorroId +", "+ stuId +", "+ borrowedbookID + ", '"+currentdate+"', NULL)", myConnection);
+                SqlCommand insertStatement = new SqlCommand("insert into borrows (borrowId, studentId, bookId, takenDate, broughtDate) values(" + newBorroId +", "+ stuId +", "+ borrowedbookID + ", '"+currentdate+"', NULL)", myConnection);
                 insertStatement.ExecuteNonQuery();
             }
             catch (Exception)
@@ -306,8 +306,11 @@ namespace Super_Duper_Library.Models
             }
         }
 
-        public void returnBook(int borrowId)
+        public List<Borrows> returnBook(int borrowId, int id)
         {
+            List<Borrows> borrow = getBorrows(id);
+            //List<Books> bookname = getAllBooks();
+          
             //teaken date
             string currentdate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
 
@@ -326,6 +329,8 @@ namespace Super_Duper_Library.Models
             {
                 myConnection.Close();
             }
+
+            return borrow;
         }
 
        

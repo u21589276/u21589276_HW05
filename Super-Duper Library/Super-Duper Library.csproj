@@ -131,6 +131,7 @@
     <Compile Include="Models\Borrows.cs" />
     <Compile Include="Models\BorrowsVM.cs" />
     <Compile Include="Models\LibraryRecordsVm.cs" />
+    <Compile Include="Models\ReturnBorrowVm.cs" />
     <Compile Include="Models\ServiceData.cs" />
     <Compile Include="Models\Students.cs" />
     <Compile Include="Models\Types.cs" />

@@ -38,7 +38,7 @@
 
 <div class="row">
     <div class="col-sm-6"><h2 class="text-left"># Borrows - @Model.Borrows.Count()</h2></div>
-    <div class="col-sm-6 text-right"><br />@Html.ActionLink("View Students", "Students", "Home",new {id=Model.BookID, FirstborrowID= Model.Borrows[0].BorrowId, Bname=Model.BookName}, new { @class = "btn btn-primary" })</div>
+    <div class="col-sm-6 text-right"><br />@Html.ActionLink("View Students", "Students", "Home",new {id=Model.BookID, FirstborrowID= Model.Borrows[0].BorrowId}, new { @class = "btn btn-primary" })</div>
 
     <div class="col-sm-12">
         <table class="table">
