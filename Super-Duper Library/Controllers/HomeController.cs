@@ -100,7 +100,7 @@ namespace Super_Duper_Library.Controllers
         {
 
             LibraryRecordsVm searchdata = null;
-            if (bookname != null)
+            if (bookname != "")
             {
                 searchdata = new LibraryRecordsVm
                 {
@@ -112,7 +112,7 @@ namespace Super_Duper_Library.Controllers
                 };
 
             }
-            else if (author != null)
+            else if (author != "" && bookname == "")
             {
                 Authors allauthors = new Authors();
                 List<Books> specificbook = serviceData.getAllBooks().Where(b => b.AuthorId == allauthors.AuthorId).ToList();
@@ -126,7 +126,7 @@ namespace Super_Duper_Library.Controllers
 
                 };
             }
-            else if (type != null)
+            else if (type != "" && bookname == "")
             {
                 Authors allauthors = new Authors();
                 List<Books> specificbook = serviceData.getAllBooks().Where(b => b.AuthorId == allauthors.AuthorId).ToList();
@@ -136,6 +136,20 @@ namespace Super_Duper_Library.Controllers
 
                     Books = specificbook,
                     Authors = serviceData.getAllAuthors(),
+                    Types = serviceData.getbyType(type)
+
+                };
+            }
+            else if (type != "" && author != "")
+            {
+                Authors allauthors = new Authors();
+                List<Books> specificbook = serviceData.getAllBooks().Where(b => b.AuthorId == allauthors.AuthorId).ToList();
+
+                searchdata = new LibraryRecordsVm
+                {
+
+                    Books = specificbook,
+                    Authors = serviceData.getbyAuthor(author),
                     Types = serviceData.getbyType(type)
 
                 };

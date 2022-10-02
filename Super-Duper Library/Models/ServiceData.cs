@@ -233,32 +233,24 @@ namespace Super_Duper_Library.Models
 
         public List<Books> getBooksbyName(string bookname)
         {
-            /*List<Product> products = ListRepository.Products.Where(x =>
-                   (x.Prices.Average(y => y.Price) >= min) && (x.Prices.Average(y => y.Price) <= max)
-               ).ToList();*/
-
+           
             //Books books = null;
-            List<Books> wantedbook = getAllBooks();
-
-            //var mybook = (from b in wantedbook where b.Name == bookname select b).ToList();
-
-            if(bookname != null)
-            {
-                wantedbook = wantedbook.Where(s => s.Name.Contains(bookname)).ToList();
-            }
+            List<Books> wantedbook = getAllBooks().Where(b => b.Name.Contains(bookname)).ToList(); ;
 
             return wantedbook;
         }
 
         public List<Authors> getbyAuthor(string author)
         {
-            //Books books = null;
             List<Authors> wantedauthor = getAllAuthors();
 
-            //var mybook = (from a in wantedauthor where a.Name == author select a).ToList();
-
-            if (author != null)
+            if (author == null)
             {
+                wantedauthor = wantedauthor.Where(b => b.Name.Contains(author)).ToList();
+            }
+            else
+            {
+                
                 wantedauthor = wantedauthor.Where(b => b.Name.Contains(author)).ToList();
             }
 
@@ -268,14 +260,7 @@ namespace Super_Duper_Library.Models
         public List<Types> getbyType(string type)
         {
             //Books books = null;
-            List<Types> wantedtype = getAllBtypes();
-
-            //var mybook = (from t in wantedtype where t.Name == type select t).ToList();
-
-            if (wantedtype  != null)
-            {
-                wantedtype = wantedtype.Where(s => s.Name.Contains(type)).ToList();
-            }
+            List<Types> wantedtype = getAllBtypes().Where(s => s.Name.Contains(type)).ToList();
 
             return wantedtype;
         }
